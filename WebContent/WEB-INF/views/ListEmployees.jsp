@@ -27,15 +27,12 @@
 		 <caption><h2>List of Employees</h2></caption>
 		 <a href="homeView.jsp">Add Employee</a>
 		  <tr>
-                <th>Employee ID</th>
-                <th>Employee Name</th>
-                <th>Address</th>
-                <th>Designation</th>
-                <th>Faculty</th>
-                <th>Department</th>
-                <th>Qualifications</th>
-                <th>Gender</th>
-                <th>Select</th>
+                <th>Chooser</th>
+                <th>Food Id</th>
+                <th>Food Name</th>
+                <th>Unit Price</th>
+                 <th>Amount</th>
+               
             </tr>
             <%
             	IReservationService iEmployeeService = new ReservationServiceImpl();
@@ -44,25 +41,32 @@
                                     	for(Reservation employee : arrayList){
             %>
 			 <tr>
+			 	<td><input type="checkbox" name="name1" />&nbsp; </td>	
 				<td> <%=employee.getEmployeeID() %> </td>
 				<td> <%=employee.getName() %> </td>
 				<td> <%=employee.getAddress() %> </td>
-				<td> <%=employee.getAddress()%> </td>
-				<td> <%=employee.getContactNumber()%> </td>
-				<td> <%=employee.getResDate()%> </td>
-				<td> <%=employee.getNoOfChairs()%> </td>
-				<td> <%=employee.getEmail()%> </td>	
+				<td> <input type="text" name="amtEntered" /> </td>
+				
 				<td> 
-				<form method="POST" action="GetEmployeeServlet">
-				<input type="hidden" name="employeeID" value="<%=employee.getEmployeeID()%>"/>
-				 <input type="submit" value= "Select Employee" class="select-button" /> 
-				 </form>
+					<form method="POST" action="GetEmployeeServlet">
+						<input type="hidden" name="employeeID" value="<%=employee.getEmployeeID()%>"/>
+					 	<input type="submit" value= "Select Employee" class="select-button" /> 
+					 </form>
+				 
 				 </td>	
 				</tr>			
 			<%	
 			   }
             %>     
 		</table>
+			<form method="POST" action="ListEmployeeServlet">
+						<table>
+							<tr>
+								<td colspan="2"><input type="submit" value="Submit Order" class="list-button" />
+								</td>
+							</tr>
+						</table>
+					</form>
 		</div>
 		
 </body>

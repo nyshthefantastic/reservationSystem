@@ -264,51 +264,33 @@ public class ReservationServiceImpl implements IReservationService {
 				 * Get employee by ID query will be retrieved from
 				 * EmployeeQuery.xml
 				 */
-				preparedStatement = connection
-						.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_GET_EMPLOYEE));
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, employeeID);
+				  String load = "SELECT * FROM Foods WHERE id='" + employeeID + "'";
+
+		            pst = con.prepareStatement(load);
 			}
 			/*
 			 * If employee ID is not provided for get employee option it display
 			 * all employees
 			 */
 			else {
-				preparedStatement = connection
-						.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_ALL_EMPLOYEES));
+				  String load = "SELECT * FROM Foods";
+
+		            pst = con.prepareStatement(load);
 			}
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
 				Reservation reservation = new Reservation();
-				reservation.setEmployeeID(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
-				reservation.setName(resultSet.getString(CommonConstants.COLUMN_INDEX_TWO));
-				reservation.setAddress(resultSet.getString(CommonConstants.COLUMN_INDEX_THREE));
-				reservation.setContactNumber(resultSet.getString(CommonConstants.COLUMN_INDEX_FOUR));
-				reservation.setResDate(resultSet.getString(CommonConstants.COLUMN_INDEX_FIVE));
-				reservation.setAddress(resultSet.getString(CommonConstants.COLUMN_INDEX_SIX));
-				reservation.setNoOfChairs(resultSet.getString(CommonConstants.COLUMN_INDEX_SEVEN));
-				reservation.setEmail(resultSet.getString(CommonConstants.COLUMN_INDEX_EIGHT));
+				reservation.setEmployeeID(resultSet.getString("id"));
+				reservation.setName(resultSet.getString("foodName"));
+				reservation.setAddress(resultSet.getString("unitPrice"));
+				
 				employeeList.add(reservation);
 			}
 
-		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
+		} catch (SQLException |  ClassNotFoundException e) {
 			log.log(Level.SEVERE, e.getMessage());
-		} finally {
-			/*
-			 * Close prepared statement and database connectivity at the end of
-			 * transaction
-			 */
-			try {
-				if (preparedStatement != null) {
-					preparedStatement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				log.log(Level.SEVERE, e.getMessage());
-			}
-		}
+		} 
 		return employeeList;
 	}
 
@@ -395,32 +377,18 @@ public class ReservationServiceImpl implements IReservationService {
 		 * List of employee IDs will be retrieved from EmployeeQuery.xml
 		 */
 		try {
-			connection = DBConnectionUtil.getDBConnection();
-			preparedStatement = connection
-					.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_GET_EMPLOYEE_IDS));
-			ResultSet resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				arrayList.add(resultSet.getString(CommonConstants.COLUMN_INDEX_ONE));
-			}
-		} catch (SQLException | SAXException | IOException | ParserConfigurationException
-				| ClassNotFoundException e) {
+			 
+		            String load = "SELECT * FROM Foods";
+
+		            pst = con.prepareStatement(load);
+		            rs = pst.executeQuery();
+					while (rs.next()) {
+							arrayList.add(rs.getString("id"));
+					}
+		} catch (SQLException e) {
 			log.log(Level.SEVERE, e.getMessage());
-		} finally {
-			/*
-			 * Close prepared statement and database connectivity at the end of
-			 * transaction
-			 */
-			try {
-				if (preparedStatement != null) {
-					preparedStatement.close();
-				}
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				log.log(Level.SEVERE, e.getMessage());
-			}
-		}
+		} 
 		return arrayList;
+	
 	}
 }
