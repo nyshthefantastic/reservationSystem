@@ -8,5 +8,6 @@ public interface IFoodService {
 
 	
 	public ArrayList<Food> getFoods();
+	public Food getFoodByID(String foodid);
 
 }

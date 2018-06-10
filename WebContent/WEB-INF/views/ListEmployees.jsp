@@ -44,14 +44,11 @@
 			 	<td><input type="checkbox" name="name1" />&nbsp; </td>	
 				<td> <%=foods.getFoodID() %> </td>
 				<td> <%=foods.getName() %> </td>
-				<td> <%=foods.getUnitPrice() %> </td>
+				<td> <%=foods.getUnitPrice()%>  </td>
 				<td> <input type="text" name="amtEntered" /> </td>
 				
 				<td> 
-					<form method="POST" action="GetEmployeeServlet">
-						<input type="hidden" name="employeeID" value="<%=employee.getEmployeeID()%>"/>
-					 	<input type="submit" value= "Select Employee" class="select-button" /> 
-					 </form>
+					
 				 
 				 </td>	
 				</tr>			
@@ -59,7 +56,7 @@
 			   }
             %>     
 		</table>
-			<form method="POST" action="ListEmployeeServlet">
+			<form method="POST" action="submitOrderServelet">
 						<table>
 							<tr>
 								<td colspan="2"><input type="submit" value="Submit Order" class="list-button" />

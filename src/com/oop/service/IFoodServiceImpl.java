@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 
 import com.oop.model.Food;
-
+import com.oop.model.Reservation;
 import com.oop.util.dbconnct;
 
 public class IFoodServiceImpl implements IFoodService{
@@ -21,14 +21,18 @@ public class IFoodServiceImpl implements IFoodService{
 	        con = dbconnct.connect();
 
 	 }
-	
+	 @Override
+	public Food getFoodByID(String foodid) {
+
+			return actiononfood(foodid).get(0);
+	}
 	@Override
 	public ArrayList<Food> getFoods() {
 		
-		return actionOnEmployee(null);
+		return actiononfood(null);
 	}
 	
-	private ArrayList<Food> actionOnEmployee(String foodID) {
+	private ArrayList<Food> actiononfood(String foodID) {
 
 		ArrayList<Food> foodList = new ArrayList<Food>();
 		try {
