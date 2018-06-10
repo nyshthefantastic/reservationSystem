@@ -48,26 +48,7 @@ public class ReservationServiceImpl implements IReservationService {
 	}
 
 
-	/**
-	 * This method initially drop existing Employees table in the database and
-	 * recreate table structure to insert employee entries
-	 * 
-	 * @throws SQLException
-	 *             - Thrown when database access error occurs or this method is
-	 *             called on a closed connection
-	 * @throws ClassNotFoundException
-	 *             - Thrown when an application tries to load in a class through
-	 *             its string name using
-	 * @throws SAXException
-	 *             - Encapsulate a general SAX error or warning
-	 * @throws IOException
-	 *             - Exception produced by failed or interrupted I/O operations.
-	 * @throws ParserConfigurationException
-	 *             - Indicates a serious configuration error
-	 * @throws NullPointerException
-	 *             - Service is not available
-	 * 
-	 */
+	
 	public static void createEmployeeTable() {
 
 		try {
@@ -85,20 +66,7 @@ public class ReservationServiceImpl implements IReservationService {
 		}
 	}
 
-	/**
-	 * Add set of employees for as a batch from the selected employee List
-	 * 
-	 * @throws SQLException
-	 *             - Thrown when database access error occurs or this method is
-	 *             called on a closed connection
-	 * @throws SAXException
-	 *             - Encapsulate a general SAX error or warning
-	 * @throws IOException
-	 *             - Exception produced by failed or interrupted I/O operations.
-	 * @throws ParserConfigurationException
-	 *             - Indicates a serious configuration error.
-	 * 
-	 */
+	
 	@Override
 	public void addTableReservation(Reservation reservation) {
 
@@ -140,54 +108,21 @@ public class ReservationServiceImpl implements IReservationService {
 
 		
 	}
-	/**
-	 * Employee details can be retrieved based on the provided employee ID
-	 * 
-	 * @param employeeID
-	 *            - Employee details are filtered based on the ID
-	 * 
-	 * @see #actionOnEmployee()
-	 */
+	
 	@Override
 	public Reservation getEmployeeByID(String employeeID) {
 
 		return actionOnEmployee(employeeID).get(0);
 	}
 	
-	/**
-	 * Get all list of employees
-	 * 
-	 * @return ArrayList<Employee> 
-	 * 						- Array of employee list will be return
-	 * 
-	 * @see #actionOnEmployee()
-	 */
+	
 	@Override
 	public ArrayList<Reservation> getEmployees() {
 		
 		return actionOnEmployee(null);
 	}
 
-	/**
-	 * This method delete an employee based on the provided ID
-	 * 
-	 * @param employeeID
-	 *            - Delete employee according to the filtered employee details
-	 * @throws SQLException
-	 *             - Thrown when database access error occurs or this method is
-	 *             called on a closed connection
-	 * @throws ClassNotFoundException
-	 *             - Thrown when an application tries to load in a class through
-	 *             its string name using
-	 * @throws SAXException
-	 *             - Encapsulate a general SAX error or warning
-	 * @throws IOException
-	 *             - Exception produced by failed or interrupted I/O operations.
-	 * @throws ParserConfigurationException
-	 *             - Indicates a serious configuration error.
-	 * @throws NullPointerException
-	 *             - Service is not available
-	 */
+	
 	@Override
 	public void removeEmployee(String employeeID) {
 
@@ -350,32 +285,11 @@ public class ReservationServiceImpl implements IReservationService {
 		// Get the updated employee
 		return getEmployeeByID(employeeID);
 	}
-	
-	/**
-	 *
-	 * @return ArrayList<String> Array of employee id list will be return
-	 * 
-	 * @throws SQLException
-	 *             - Thrown when database access error occurs or this method is
-	 *             called on a closed connection
-	 * @throws ClassNotFoundException
-	 *             - Thrown when an application tries to load in a class through
-	 *             its string name using
-	 * @throws SAXException
-	 *             - Encapsulate a general SAX error or warning
-	 * @throws IOException
-	 *             - Exception produced by failed or interrupted I/O operations.
-	 * @throws ParserConfigurationException
-	 *             - Indicates a serious configuration error.
-	 * @throws NullPointerException
-	 *             - Service is not available
-	 */
+
 	private ArrayList<String> getEmployeeIDs(){
 		
 		ArrayList<String> arrayList = new ArrayList<String>();
-		/*
-		 * List of employee IDs will be retrieved from EmployeeQuery.xml
-		 */
+		
 		try {
 			 
 		            String load = "SELECT * FROM Foods";
