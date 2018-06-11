@@ -11,6 +11,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="../../addPrices.js"></script>
 <link rel = "stylesheet"
    type = "text/css"
    href = "Employee.css" />
@@ -23,7 +25,7 @@
 	<br>
 	<br>
 	  <div align="left">
-		<table border="1" cellpadding="12">
+		<table border="1" cellpadding="12" id="mytable">
 		 <caption><h2>List of Food Items</h2></caption>
 		 <a href="homeView.jsp">Table Reservation</a>
 		  <tr>
@@ -44,7 +46,7 @@
 			 	<td><input type="checkbox" name="name1" />&nbsp; </td>	
 				<td> <%=foods.getFoodID() %> </td>
 				<td> <%=foods.getName() %> </td>
-				<td> <%=foods.getUnitPrice()%>  </td>
+				<td id="xy"> <%=foods.getUnitPrice()%>  </td>
 				<td> <input type="text" name="amtEntered" /> </td>
 				
 				<td> 
@@ -55,15 +57,24 @@
 			<%	
 			   }
             %>     
+            <tr>
+								<td colspan="2"><input type="submit" value="Submit Order" onClick="priceAdder()" class="list-button" />
+								</td>
+							</tr>
 		</table>
-			<form method="POST" action="submitOrderServelet">
+		<script>
+			
+			
+				</script>
+	<!-- 		<form method="POST" action="submitOrderServelet">
+				
 						<table>
 							<tr>
 								<td colspan="2"><input type="submit" value="Submit Order" class="list-button" />
 								</td>
 							</tr>
 						</table>
-					</form>
+					</form> -->
 		</div>
 		
 </body>
