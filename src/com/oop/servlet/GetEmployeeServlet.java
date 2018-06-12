@@ -50,8 +50,8 @@ public class GetEmployeeServlet extends HttpServlet {
 		response.setContentType("text/html");
 
  		String employeeID = request.getParameter("employeeID");			
-		IReservationService iEmployeeService = new ReservationServiceImpl();
-		Reservation reservation = iEmployeeService.getEmployeeByID(employeeID);
+		IReservationService resSer = new ReservationServiceImpl();
+		Reservation reservation = resSer.getFoodById(employeeID);
 
 		request.setAttribute("employee", reservation);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/GetEmployee.jsp");

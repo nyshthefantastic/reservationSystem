@@ -19,15 +19,10 @@ public interface IReservationService {
 	public void addTableReservation(Reservation reservation);
 
 
-	public Reservation getEmployeeByID(String empoyeeID);
+	public Reservation getFoodById(String foodID);
 	
 
 	public ArrayList<Reservation> getEmployees();
 	
-
-	public Reservation updateEmployee(String employeeID, Reservation reservation);
-
-
-	public void removeEmployee(String employeeID);
 
 }

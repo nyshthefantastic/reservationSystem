@@ -6,7 +6,7 @@ $(document).ready(function(){
 			            {
 			                var value = $(this).closest('tr').find($( "input[type=text]" )).val();
 			                console.log(value);
-			                var customerId = document.getElementById("xy").value;
+			                var customerId = document.getElementById("xy").innerText;
 			                console.log(customerId);
 			            }
 			        });

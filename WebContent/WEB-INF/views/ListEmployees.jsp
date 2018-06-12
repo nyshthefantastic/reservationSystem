@@ -11,13 +11,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="../../addPrices.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel = "stylesheet"
    type = "text/css"
    href = "Employee.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Food Ordering System</title>
+	   <script>
+	   function myFunc(){
+            $(document).ready(function(){
+		        $( "input[type=checkbox]" ).each(function(){
+		            if($(this).is(':checked'))
+		            {
+		                var value = $(this).closest('tr').find($( "input[type=text]" )).val();
+		                console.log(value);
+		                var amount = document.getElementById("xy").innerText;
+		                console.log(amount);
+		                document.getElementById('totVal').value="Total Value is : "+amount*value;
+		                console.log('Total Value is : '+amount*value);
+		                
+
+		            }
+		        });
+		    });
+            
+	   }
+            </script>
 </head>
 <body>
 	<h3>Food Ordering System</h3>
@@ -57,8 +83,9 @@
 			<%	
 			   }
             %>     
+         
             <tr>
-								<td colspan="2"><input type="submit" value="Submit Order" onClick="priceAdder()" class="list-button" />
+								<td colspan="2"><input type="submit" value="Submit Order" onclick="myFunc()" class="list-button" />
 								</td>
 							</tr>
 		</table>
@@ -66,6 +93,7 @@
 			
 			
 				</script>
+				<textarea id="totVal"></textarea>
 	<!-- 		<form method="POST" action="submitOrderServelet">
 				
 						<table>

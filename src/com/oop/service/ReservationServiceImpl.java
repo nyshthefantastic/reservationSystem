@@ -17,10 +17,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import com.oop.model.Reservation;
-import com.oop.util.CommonConstants;
-import com.oop.util.CommonUtil;
-import com.oop.util.DBConnectionUtil;
-import com.oop.util.QueryUtil;
 
 
 public class ReservationServiceImpl implements IReservationService {
@@ -44,33 +40,15 @@ public class ReservationServiceImpl implements IReservationService {
 	 }
 	static{
 		//create table or drop if exist
-		createEmployeeTable();
 	}
 
 
 	
-	public static void createEmployeeTable() {
-
-		try {
-			connection = DBConnectionUtil.getDBConnection();
-			statement = connection.createStatement();
-			// Drop table if already exists and as per SQL query available in
-			// Query.xml
-			statement.executeUpdate(QueryUtil.queryByID(CommonConstants.QUERY_ID_DROP_TABLE));
-			// Create new employees table as per SQL query available in
-			// Query.xml
-			statement.executeUpdate(QueryUtil.queryByID(CommonConstants.QUERY_ID_CREATE_TABLE));
-
-		} catch (SQLException | SAXException | IOException | ParserConfigurationException | ClassNotFoundException e) {
-			log.log(Level.SEVERE, e.getMessage());
-		}
-	}
 
 	
 	@Override
 	public void addTableReservation(Reservation reservation) {
 
-		String employeeID = CommonUtil.generateIDs(getEmployeeIDs());
 		
 		if(checkNumberofReservations( reservation.getContactNumber(), reservation.getafterdate())<15) {
 			
@@ -110,9 +88,9 @@ public class ReservationServiceImpl implements IReservationService {
 	}
 	
 	@Override
-	public Reservation getEmployeeByID(String employeeID) {
+	public Reservation getFoodById(String foodId) {
 
-		return actionOnEmployee(employeeID).get(0);
+		return actionOnEmployee(foodId).get(0);
 	}
 	
 	
@@ -123,90 +101,19 @@ public class ReservationServiceImpl implements IReservationService {
 	}
 
 	
-	@Override
-	public void removeEmployee(String employeeID) {
+	
+	private ArrayList<Reservation> actionOnEmployee(String res) {
 
-		// Before deleting check whether employee ID is available
-		if (employeeID != null && !employeeID.isEmpty()) {
-			/*
-			 * Remove employee query will be retrieved from EmployeeQuery.xml
-			 */
-			try {
-				connection = DBConnectionUtil.getDBConnection();
-				preparedStatement = connection
-						.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_REMOVE_EMPLOYEE));
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, employeeID);
-				preparedStatement.executeUpdate();
-			} catch (SQLException | SAXException | IOException | ParserConfigurationException
-					| ClassNotFoundException e) {
-				log.log(Level.SEVERE, e.getMessage());
-			} finally {
-				/*
-				 * Close prepared statement and database connectivity at the end
-				 * of transaction
-				 */
-				try {
-					if (preparedStatement != null) {
-						preparedStatement.close();
-					}
-					if (connection != null) {
-						connection.close();
-					}
-				} catch (SQLException e) {
-					log.log(Level.SEVERE, e.getMessage());
-				}
-			}
-		}
-	}
-
-	/**
-	 * This performs GET employee by ID and Display all employees
-	 * 
-	 * @param employeeID
-	 *            ID of the employee to remove or select from the list
-
-	 * @return ArrayList<Employee> Array of employee list will be return
-	 * 
-	 * @throws SQLException
-	 *             - Thrown when database access error occurs or this method is
-	 *             called on a closed connection
-	 * @throws ClassNotFoundException
-	 *             - Thrown when an application tries to load in a class through
-	 *             its string name using
-	 * @throws SAXException
-	 *             - Encapsulate a general SAX error or warning
-	 * @throws IOException
-	 *             - Exception produced by failed or interrupted I/O operations.
-	 * @throws ParserConfigurationException
-	 *             - Indicates a serious configuration error.
-	 * @throws NullPointerException
-	 *             - Service is not available
-	 * 
-	 * @see #getEmployees()
-	 * @see #getEmployeeByID(String)
-	 */
-	private ArrayList<Reservation> actionOnEmployee(String employeeID) {
-
-		ArrayList<Reservation> employeeList = new ArrayList<Reservation>();
+		ArrayList<Reservation> foodInfoList = new ArrayList<Reservation>();
 		try {
-			connection = DBConnectionUtil.getDBConnection();
-			/*
-			 * Before fetching employee it checks whether employee ID is
-			 * available
-			 */
-			if (employeeID != null && !employeeID.isEmpty()) {
-				/*
-				 * Get employee by ID query will be retrieved from
-				 * EmployeeQuery.xml
-				 */
-				  String load = "SELECT * FROM Foods WHERE id='" + employeeID + "'";
+		
+			if (res != null && !res.isEmpty()) {
+				
+				  String load = "SELECT * FROM Foods WHERE id='" + res + "'";
 
 		            pst = con.prepareStatement(load);
 			}
-			/*
-			 * If employee ID is not provided for get employee option it display
-			 * all employees
-			 */
+			
 			else {
 				  String load = "SELECT * FROM Foods";
 
@@ -220,73 +127,18 @@ public class ReservationServiceImpl implements IReservationService {
 				reservation.setName(resultSet.getString("foodName"));
 				reservation.setAddress(resultSet.getString("unitPrice"));
 				
-				employeeList.add(reservation);
+				foodInfoList.add(reservation);
 			}
 
-		} catch (SQLException |  ClassNotFoundException e) {
+		} catch (SQLException  e) {
 			log.log(Level.SEVERE, e.getMessage());
 		} 
-		return employeeList;
+		return foodInfoList;
 	}
 
-	/**
-	 * Get the updated employee
-	 * 
-	 * @param employeeID
-	 *            ID of the employee to remove or select from the list
-	 * 
-	 * @return return the Employee object
-	 * 
-	 */
-	@Override
-	public Reservation updateEmployee(String employeeID, Reservation reservation) {
 
-		/*
-		 * Before fetching employee it checks whether employee ID is available
-		 */
-		if (employeeID != null && !employeeID.isEmpty()) {
-			/*
-			 * Update employee query will be retrieved from EmployeeQuery.xml
-			 */
-			try {
-				connection = DBConnectionUtil.getDBConnection();
-				preparedStatement = connection
-						.prepareStatement(QueryUtil.queryByID(CommonConstants.QUERY_ID_UPDATE_EMPLOYEE));
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_ONE, reservation.getName());
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_TWO, reservation.getAddress());
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_THREE, reservation.getContactNumber());
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_FOUR, reservation.getResDate());
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_FIVE, reservation.getAddress());
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_SIX, reservation.getNoOfChairs());
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_SEVEN, reservation.getEmail());
-				preparedStatement.setString(CommonConstants.COLUMN_INDEX_EIGHT, reservation.getEmployeeID());
-				preparedStatement.executeUpdate();
-
-			} catch (SQLException | SAXException | IOException | ParserConfigurationException
-					| ClassNotFoundException e) {
-				log.log(Level.SEVERE, e.getMessage());
-			} finally {
-				/*
-				 * Close prepared statement and database connectivity at the end
-				 * of transaction
-				 */
-				try {
-					if (preparedStatement != null) {
-						preparedStatement.close();
-					}
-					if (connection != null) {
-						connection.close();
-					}
-				} catch (SQLException e) {
-					log.log(Level.SEVERE, e.getMessage());
-				}
-			}
-		}
-		// Get the updated employee
-		return getEmployeeByID(employeeID);
-	}
-
-	private ArrayList<String> getEmployeeIDs(){
+	
+	private ArrayList<String> getFoodId(){
 		
 		ArrayList<String> arrayList = new ArrayList<String>();
 		

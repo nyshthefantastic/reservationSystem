@@ -51,9 +51,7 @@
 			<tr>
 				<td colspan="2"><input type="submit" value="Add Employee" class="add-button" /> </td>
 			</tr>
-			<tr>	
-				<td colspan="2"><input type="reset" value="Reset" class="reset-button" /></td>
-			</tr>
+			
 		</table>
 	</form>
 
@@ -66,7 +64,6 @@
 		</table>
 	</form>
 
-	<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 
 </body>
 </html>
