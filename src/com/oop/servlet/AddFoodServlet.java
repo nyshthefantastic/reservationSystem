@@ -12,35 +12,22 @@ import com.oop.model.Reservation;
 import com.oop.service.ReservationServiceImpl;
 import com.oop.service.IReservationService;
 
-/**
- * Servlet implementation class LoginServlet
- */
-public class AddEmployeeServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
+public class AddFoodServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public AddEmployeeServlet() {
+	
+	public AddFoodServlet() {
 		super();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -55,11 +42,11 @@ public class AddEmployeeServlet extends HttpServlet {
 		reservation.setNoOfChairs(request.getParameter("noChair"));
 		reservation.setEmail(request.getParameter("emailAdd"));
 
-		IReservationService iEmployeeService = new ReservationServiceImpl();
-		iEmployeeService.addTableReservation(reservation);
+		IReservationService iresservice = new ReservationServiceImpl();
+		iresservice.addTableReservation(reservation);
 
 		request.setAttribute("employee", reservation);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/ListEmployees.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/ListFoods.jsp");
 		dispatcher.forward(request, response);
 	}
 

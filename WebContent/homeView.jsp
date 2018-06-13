@@ -5,7 +5,7 @@
 <head>
 <link rel = "stylesheet"
    type = "text/css"
-   href = "Employee.css" />
+   href = "resSystem.css" />
 
 <meta charset="UTF-8">
 <title>Online table reservation</title>
@@ -19,7 +19,7 @@
 	<br>
 	<br>
 
-	<form method="POST" action="AddEmployeeServlet">
+	<form method="POST" action="AddFoodServlet">
 		<table>
 
 			<tr>
@@ -49,16 +49,16 @@
 			</tr>
 		
 			<tr>
-				<td colspan="2"><input type="submit" value="Add Employee" class="add-button" /> </td>
+				<td colspan="2"><input type="submit" value="Add Food" class="add-button" /> </td>
 			</tr>
 			
 		</table>
 	</form>
 
-	<form method="POST" action="ListEmployeeServlet">
+	<form method="POST" action="ListFoodServlet">
 		<table>
 			<tr>
-				<td colspan="2"><input type="submit" value="List All Employees" class="list-button" />
+				<td colspan="2"><input type="submit" value="List All Food" class="list-button" />
 				</td>
 			</tr>
 		</table>

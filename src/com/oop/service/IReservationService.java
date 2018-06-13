@@ -19,10 +19,8 @@ public interface IReservationService {
 	public void addTableReservation(Reservation reservation);
 
 
-	public Reservation getFoodById(String foodID);
 	
 
-	public ArrayList<Reservation> getEmployees();
 	
 
 }

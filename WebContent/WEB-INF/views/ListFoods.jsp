@@ -21,7 +21,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel = "stylesheet"
    type = "text/css"
-   href = "Employee.css" />
+   href = "resSystem.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Food Ordering System</title>
 	   <script>
@@ -94,15 +94,7 @@
 			
 				</script>
 				<textarea id="totVal"></textarea>
-	<!-- 		<form method="POST" action="submitOrderServelet">
-				
-						<table>
-							<tr>
-								<td colspan="2"><input type="submit" value="Submit Order" class="list-button" />
-								</td>
-							</tr>
-						</table>
-					</form> -->
+	
 		</div>
 		
 </body>

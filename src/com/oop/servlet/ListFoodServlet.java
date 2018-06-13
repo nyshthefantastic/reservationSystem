@@ -8,44 +8,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oop.model.Reservation;
-import com.oop.service.ReservationServiceImpl;
-import com.oop.service.IReservationService;
 
-/**
- * Servlet implementation for List of Employees
- */
-public class ListEmployeeServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
+
+public class ListFoodServlet extends HttpServlet {
+
+	
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public ListEmployeeServlet() {
+	
+	public ListFoodServlet() {
 		super();
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/ListEmployees.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/views/ListFoods.jsp");
 		dispatcher.forward(request, response);
 	}
 
